@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<flowgorithm fileversion="3.0">
+    <attributes>
+        <attribute name="name" value=""/>
+        <attribute name="authors" value="Vazy"/>
+        <attribute name="about" value=""/>
+        <attribute name="saved" value="2023-09-25 06:31:08 odp."/>
+        <attribute name="created" value="VmF6eTtWQVpZLVBDOzIwMjMtMDktMjU7MDQ6MzM6MDggb2RwLjsyNDQ1"/>
+        <attribute name="edited" value="VmF6eTtWQVpZLVBDOzIwMjMtMDktMjU7MDY6MzE6MDggb2RwLjs1OzI1NTc="/>
+    </attributes>
+    <function name="Main" type="None" variable="">
+        <parameters/>
+        <body>
+            <declare name="Cx, Cy, Dx, Dy, Ax, Ay, Bx, By, d, AB, BC" type="Real" array="False" size=""/>
+            <input variable="Ax"/>
+            <input variable="Ay"/>
+            <input variable="Bx"/>
+            <input variable="By"/>
+            <input variable="d"/>
+            <assign variable="AB" expression="Sqrt((Bx-Ax)^2+(By-Ay)^2)"/>
+            <assign variable="BC" expression="Sqrt(d^2 - AB^2)"/>
+            <assign variable="Cx" expression="(Ay - By) / AB * BC + Bx"/>
+            <assign variable="Cy" expression="-(Ax - Bx) / AB  * BC + By"/>
+            <assign variable="Dx" expression="-(By - Ay) / AB * BC + Ax"/>
+            <assign variable="Dy" expression="(Bx - Ax) / AB  * BC + Ay"/>
+            <output expression="&quot;Cx = &quot;&amp;ToFixed(Cx, 2)" newline="True"/>
+            <output expression="&quot;Cy = &quot;&amp;ToFixed(Cy, 2)" newline="True"/>
+            <output expression="&quot;Dx = &quot;&amp;ToFixed(Dx, 2)" newline="True"/>
+            <output expression="&quot;Dy = &quot;&amp;ToFixed(Dy, 2)" newline="True"/>
+        </body>
+    </function>
+</flowgorithm>
