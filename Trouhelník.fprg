@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<flowgorithm fileversion="3.0">
+    <attributes>
+        <attribute name="name" value=""/>
+        <attribute name="authors" value="Vazy"/>
+        <attribute name="about" value=""/>
+        <attribute name="saved" value="2023-09-26 11:52:40 dop."/>
+        <attribute name="created" value="VmF6eTtERVNLVE9QLUpQU1BPUzU7MjAyMy0wOS0yNjsxMDozODo1NyBkb3AuOzMwNDU="/>
+        <attribute name="edited" value="VmF6eTtERVNLVE9QLUpQU1BPUzU7MjAyMy0wOS0yNjsxMTo1Mjo0MCBkb3AuOzI7MzE0Mw=="/>
+    </attributes>
+    <function name="Main" type="None" variable="">
+        <parameters/>
+        <body>
+            <declare name="a, b, diagonal, alpha" type="Real" array="False" size=""/>
+            <output expression="&quot;Zadejte stranu a, a &#250;hel alpha&quot;" newline="True"/>
+            <input variable="a"/>
+            <input variable="alpha"/>
+            <assign variable="b" expression="Tan(alpha*Pi/180)*a"/>
+            <assign variable="diagonal" expression="Sqrt(a^2+b^2)"/>
+            <turn expression="90" rotate="right"/>
+            <forward expression="a" pen="down"/>
+            <turn expression="90" rotate="left"/>
+            <forward expression="b" pen="down"/>
+            <home/>
+            <turn expression="90-alpha" rotate="right"/>
+            <forward expression="diagonal" pen="down"/>
+            <home/>
+            <turn expression="90" rotate="right"/>
+            <forward expression="(a*2)/3" pen="down"/>
+            <turn expression="90" rotate="left"/>
+            <forward expression="b*2/3" pen="down"/>
+            <turn expression="180-alpha" rotate="right"/>
+            <forward expression="b" pen="down"/>
+        </body>
+    </function>
+</flowgorithm>

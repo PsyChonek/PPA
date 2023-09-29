@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<flowgorithm fileversion="3.0">
+    <attributes>
+        <attribute name="name" value=""/>
+        <attribute name="authors" value="Vazy"/>
+        <attribute name="about" value=""/>
+        <attribute name="saved" value="2023-09-29 02:28:48 odp."/>
+        <attribute name="created" value="VmF6eTtERVNLVE9QLUpQU1BPUzU7MjAyMy0wOS0yOTswMTo1NDozMCBvZHAuOzMwMzc="/>
+        <attribute name="edited" value="VmF6eTtERVNLVE9QLUpQU1BPUzU7MjAyMy0wOS0yOTswMjoyODo0OCBvZHAuOzM7MzE1OA=="/>
+    </attributes>
+    <function name="Main" type="None" variable="">
+        <parameters/>
+        <body>
+            <declare name="startAh, startAm, lenAh, lenAm, startBh, startBm, lenBh, lenBm, startA, startB, endA, endB" type="Integer" array="False" size=""/>
+            <input variable="startAh"/>
+            <if expression="startAh &lt; 14">
+                <then>
+                    <assign variable="startAh" expression="startAh + 24"/>
+                </then>
+                <else/>
+            </if>
+            <input variable="startAm"/>
+            <input variable="lenAh"/>
+            <input variable="lenAm"/>
+            <input variable="startBh"/>
+            <if expression="startBh &lt; 14">
+                <then>
+                    <assign variable="startBh" expression="startBh + 24"/>
+                </then>
+                <else/>
+            </if>
+            <input variable="startBm"/>
+            <input variable="lenBh"/>
+            <input variable="lenBm"/>
+            <assign variable="startA" expression="startAh * 60 + startAm"/>
+            <assign variable="startB" expression="startBh * 60 + startBm"/>
+            <assign variable="endA" expression="startA + lenAh * 60 + lenAm"/>
+            <assign variable="endB" expression="startB + lenBh * 60 + lenBm"/>
+            <if expression="endA &lt;= startB">
+                <then>
+                    <output expression="&quot;doporuceni: v pohode&quot;" newline="True"/>
+                </then>
+                <else>
+                    <if expression="endA &gt; endB">
+                        <then>
+                            <output expression="&quot;doporuceni: to nedas&quot;" newline="True"/>
+                        </then>
+                        <else>
+                            <output expression="&quot;doporuceni: neuvidis &quot;&amp;endA-startB&amp;&quot; minut&quot;" newline="True"/>
+                        </else>
+                    </if>
+                </else>
+            </if>
+        </body>
+    </function>
+</flowgorithm>

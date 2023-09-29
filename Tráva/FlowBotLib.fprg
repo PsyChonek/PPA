@@ -1,0 +1,417 @@
+<?xml version="1.0"?>
+<flowgorithm fileversion="3.0">
+    <attributes>
+        <attribute name="name" value=""/>
+        <attribute name="authors" value="pet"/>
+        <attribute name="about" value=""/>
+        <attribute name="saved" value="2023-09-12 11:03:40 PM"/>
+        <attribute name="created" value="cGV0O1BFVE5COzIwMjMtMDktMTI7MTE6MDM6NDAgUE07MTk3OA=="/>
+        <attribute name="edited" value="cGV0O1BFVE5COzIwMjMtMDktMTI7MTE6MDM6NDAgUE07MTsyMDg2"/>
+    </attributes>
+    <function name="CanMoveTo" type="Boolean" variable="result">
+        <parameters>
+            <parameter name="mem" type="Integer" array="True"/>
+            <parameter name="x" type="Integer" array="False"/>
+            <parameter name="y" type="Integer" array="False"/>
+        </parameters>
+        <body>
+            <comment text="Is it possible to move robot to x,y? "/>
+            <declare name="result" type="Boolean" array="False" size=""/>
+            <assign variable="result" expression="True"/>
+            <if expression="(x&lt;0) or (x&gt;=mem[0])">
+                <then>
+                    <assign variable="result" expression="False"/>
+                </then>
+                <else/>
+            </if>
+            <if expression="(y&lt;0) or (y&gt;=mem[1])">
+                <then>
+                    <assign variable="result" expression="False"/>
+                </then>
+                <else/>
+            </if>
+        </body>
+    </function>
+    <function name="GetHeight" type="Integer" variable="result">
+        <parameters>
+            <parameter name="mem" type="Integer" array="True"/>
+        </parameters>
+        <body>
+            <comment text="Gets the total height "/>
+            <declare name="result" type="Integer" array="False" size=""/>
+            <assign variable="result" expression="mem[1]"/>
+        </body>
+    </function>
+    <function name="GetItem" type="Integer" variable="result">
+        <parameters>
+            <parameter name="mem" type="Integer" array="True"/>
+        </parameters>
+        <body>
+            <comment text="Gets Item under the Robot "/>
+            <declare name="result" type="Integer" array="False" size=""/>
+            <assign variable="result" expression="mem[6+mem[5]+GetY(mem)*mem[0] + GetX(mem)] - 5"/>
+        </body>
+    </function>
+    <function name="GetRotation" type="Integer" variable="result">
+        <parameters>
+            <parameter name="mem" type="Integer" array="True"/>
+        </parameters>
+        <body>
+            <comment text="Gets Robot orientation, 0 is North, 1 is East, etc. "/>
+            <declare name="result" type="Integer" array="False" size=""/>
+            <assign variable="result" expression="mem[4]"/>
+        </body>
+    </function>
+    <function name="GetWidth" type="Integer" variable="result">
+        <parameters>
+            <parameter name="mem" type="Integer" array="True"/>
+        </parameters>
+        <body>
+            <comment text="Gets the total width "/>
+            <declare name="result" type="Integer" array="False" size=""/>
+            <assign variable="result" expression="mem[0]"/>
+        </body>
+    </function>
+    <function name="GetX" type="Integer" variable="result">
+        <parameters>
+            <parameter name="mem" type="Integer" array="True"/>
+        </parameters>
+        <body>
+            <comment text="Returns Robot X "/>
+            <declare name="result" type="Integer" array="False" size=""/>
+            <assign variable="result" expression="mem[2]"/>
+        </body>
+    </function>
+    <function name="GetY" type="Integer" variable="result">
+        <parameters>
+            <parameter name="mem" type="Integer" array="True"/>
+        </parameters>
+        <body>
+            <comment text="Gets Robot Y "/>
+            <declare name="result" type="Integer" array="False" size=""/>
+            <assign variable="result" expression="mem[3]"/>
+        </body>
+    </function>
+    <function name="Init" type="None" variable="">
+        <parameters>
+            <parameter name="mem" type="Integer" array="True"/>
+            <parameter name="width" type="Integer" array="False"/>
+            <parameter name="height" type="Integer" array="False"/>
+            <parameter name="items" type="String" array="False"/>
+        </parameters>
+        <body>
+            <comment text="Inits the game with given width, height and item set "/>
+            <assign variable="mem[0]" expression="width"/>
+            <assign variable="mem[1]" expression="height"/>
+            <assign variable="mem[2]" expression="0"/>
+            <assign variable="mem[3]" expression="0"/>
+            <assign variable="mem[4]" expression="0"/>
+            <assign variable="mem[Size(mem)-1]" expression="0"/>
+            <assign variable="items" expression="&quot; &#9650;&#9658;&#9660;&#9668; &quot;&amp;items"/>
+            <declare name="i, x, y" type="Integer" array="False" size=""/>
+            <assign variable="mem[5]" expression="Len(items)"/>
+            <for variable="i" start="0" end="Len(items) - 1 " direction="inc" step="1">
+                <assign variable="mem[6+i]" expression="ToCode(Char(items,i))"/>
+            </for>
+            <for variable="y" start="0" end="mem[1]-1 " direction="inc" step="1">
+                <for variable="x" start="0" end="mem[0]-1 " direction="inc" step="1">
+                    <assign variable="mem[6+mem[5] + x + y*mem[0]]" expression="5"/>
+                </for>
+            </for>
+        </body>
+    </function>
+    <function name="LevelRulesEnterField" type="None" variable="">
+        <parameters>
+            <parameter name="mem" type="Integer" array="True"/>
+        </parameters>
+        <body>
+            <comment text="needs to be implemented in main file "/>
+        </body>
+    </function>
+    <function name="LevelRulesStayOnField" type="None" variable="">
+        <parameters>
+            <parameter name="mem" type="Integer" array="True"/>
+        </parameters>
+        <body>
+            <comment text="needs to be implemented in main file "/>
+        </body>
+    </function>
+    <function name="LoadData" type="Integer" variable="result">
+        <parameters>
+            <parameter name="mem" type="Integer" array="True"/>
+            <parameter name="slot" type="Integer" array="False"/>
+        </parameters>
+        <body>
+            <comment text="Loads data from given slot "/>
+            <declare name="ptr, result, w, h" type="Integer" array="False" size=""/>
+            <assign variable="w" expression="mem[0]"/>
+            <assign variable="h" expression="mem[1]"/>
+            <assign variable="ptr" expression="6+mem[5]+2*h*w+slot"/>
+            <assign variable="result" expression="mem[ptr]"/>
+        </body>
+    </function>
+    <function name="LookForward" type="Integer" variable="result">
+        <parameters>
+            <parameter name="mem" type="Integer" array="True"/>
+        </parameters>
+        <body>
+            <comment text="Looks one field forward "/>
+            <comment text="Returns item index or -1 for out of bounds field "/>
+            <declare name="result, rot, x, y" type="Integer" array="False" size=""/>
+            <assign variable="rot" expression="GetRotation(mem)"/>
+            <assign variable="x" expression="GetX(mem) - (rot % 2) * (rot-2)"/>
+            <assign variable="y" expression="GetY(mem) + ((rot+1)%2) * (rot-1)"/>
+            <if expression="(x&lt;0) or (x&gt;=mem[0])">
+                <then>
+                    <assign variable="result" expression="-1"/>
+                </then>
+                <else>
+                    <if expression="(y&lt;0) or (y&gt;=mem[1])">
+                        <then>
+                            <assign variable="result" expression="-1"/>
+                        </then>
+                        <else>
+                            <assign variable="result" expression="mem[6+mem[5]+Y*mem[0] + X] - 5"/>
+                        </else>
+                    </if>
+                </else>
+            </if>
+        </body>
+    </function>
+    <function name="Move" type="None" variable="">
+        <parameters>
+            <parameter name="mem" type="Integer" array="True"/>
+        </parameters>
+        <body>
+            <comment text="Moves robot forward "/>
+            <declare name="x, y, rot" type="Integer" array="False" size=""/>
+            <assign variable="rot" expression="GetRotation(mem)"/>
+            <assign variable="x" expression="GetX(mem) - (rot % 2) * (rot-2)"/>
+            <assign variable="y" expression="GetY(mem) + ((rot+1)%2) * (rot-1)"/>
+            <if expression="CanMoveTo(mem, x, y)">
+                <then>
+                    <call expression="SetX(mem, x) "/>
+                    <call expression="SetY(mem, y) "/>
+                    <call expression="LevelRulesEnterField(mem) "/>
+                </then>
+                <else/>
+            </if>
+            <call expression="Show(mem) "/>
+        </body>
+    </function>
+    <function name="PutItem" type="None" variable="">
+        <parameters>
+            <parameter name="mem" type="Integer" array="True"/>
+            <parameter name="x" type="Integer" array="False"/>
+            <parameter name="y" type="Integer" array="False"/>
+            <parameter name="index" type="Integer" array="False"/>
+        </parameters>
+        <body>
+            <comment text="Puts Item to given position "/>
+            <assign variable="mem[6+mem[5]+y*mem[0] + x]" expression="5+index"/>
+        </body>
+    </function>
+    <function name="Right" type="None" variable="">
+        <parameters>
+            <parameter name="mem" type="Integer" array="True"/>
+        </parameters>
+        <body>
+            <comment text="Turns robot right "/>
+            <call expression="SetRotation(mem, GetRotation(mem)+1) "/>
+            <call expression="LevelRulesStayOnField(mem) "/>
+            <call expression="Show(mem) "/>
+        </body>
+    </function>
+    <function name="SetDelay" type="None" variable="">
+        <parameters>
+            <parameter name="mem" type="Integer" array="True"/>
+            <parameter name="sleep" type="Integer" array="False"/>
+        </parameters>
+        <body>
+            <assign variable="mem[Size(mem)-1]" expression="sleep"/>
+        </body>
+    </function>
+    <function name="SetItem" type="None" variable="">
+        <parameters>
+            <parameter name="mem" type="Integer" array="True"/>
+            <parameter name="index" type="Integer" array="False"/>
+        </parameters>
+        <body>
+            <comment text="Sets Item under the Robot "/>
+            <if expression="index&lt;0">
+                <then>
+                    <output expression="&quot;item error: Invalid code&quot;" newline="True"/>
+                </then>
+                <else>
+                    <if expression="index&gt;mem[5]-6">
+                        <then>
+                            <output expression="&quot;item error: Invalid code&quot;" newline="True"/>
+                        </then>
+                        <else>
+                            <assign variable="mem[6+mem[5]+GetY(mem)*mem[0] + GetX(mem)]" expression="5+index"/>
+                        </else>
+                    </if>
+                </else>
+            </if>
+        </body>
+    </function>
+    <function name="SetPosition" type="None" variable="">
+        <parameters>
+            <parameter name="mem" type="Integer" array="True"/>
+            <parameter name="x" type="Integer" array="False"/>
+            <parameter name="y" type="Integer" array="False"/>
+            <parameter name="rotation" type="Integer" array="False"/>
+        </parameters>
+        <body>
+            <comment text="Sets Robot position and orientation "/>
+            <call expression="SetX(mem, x) "/>
+            <call expression="SetY(mem, y) "/>
+            <call expression="SetRotation(mem, rotation) "/>
+        </body>
+    </function>
+    <function name="SetRotation" type="None" variable="">
+        <parameters>
+            <parameter name="mem" type="Integer" array="True"/>
+            <parameter name="rotation" type="Integer" array="False"/>
+        </parameters>
+        <body>
+            <comment text="Sets Robot orientation, 0 is North, 1 is East, etc. "/>
+            <if expression="rotation &lt; 0">
+                <then>
+                    <assign variable="rotation" expression="rotation + Int(-rotation/4)*4 + 4"/>
+                </then>
+                <else/>
+            </if>
+            <assign variable="mem[4]" expression="rotation%4"/>
+        </body>
+    </function>
+    <function name="SetX" type="None" variable="">
+        <parameters>
+            <parameter name="mem" type="Integer" array="True"/>
+            <parameter name="x" type="Integer" array="False"/>
+        </parameters>
+        <body>
+            <comment text="Sets Robot X "/>
+            <if expression="(x&lt;0) or (x&gt;=mem[0])">
+                <then>
+                    <output expression="&quot;robot error: invalid move in X direction&quot;" newline="True"/>
+                </then>
+                <else>
+                    <assign variable="mem[2]" expression="x"/>
+                </else>
+            </if>
+        </body>
+    </function>
+    <function name="SetY" type="None" variable="">
+        <parameters>
+            <parameter name="mem" type="Integer" array="True"/>
+            <parameter name="y" type="Integer" array="False"/>
+        </parameters>
+        <body>
+            <comment text="Sets Robot Y "/>
+            <if expression="(y&lt;0) or (y&gt;=mem[1])">
+                <then>
+                    <output expression="&quot;robot error: invalid move in Y direction&quot;" newline="True"/>
+                </then>
+                <else>
+                    <assign variable="mem[3]" expression="y"/>
+                </else>
+            </if>
+        </body>
+    </function>
+    <function name="Show" type="None" variable="">
+        <parameters>
+            <parameter name="memory" type="Integer" array="True"/>
+        </parameters>
+        <body>
+            <comment text="Shows the game "/>
+            <declare name="w, h, map, buf, x, y" type="Integer" array="False" size=""/>
+            <for variable="w" start="0" end="memory[Size(memory)-1] " direction="inc" step="1">
+                <assign variable="h" expression="w"/>
+            </for>
+            <assign variable="w" expression="memory[0]"/>
+            <assign variable="h" expression="memory[1]"/>
+            <assign variable="map" expression="6+memory[5]"/>
+            <assign variable="buf" expression="6+memory[5]+h*w"/>
+            <for variable="y" start="0" end="h-1 " direction="inc" step="1">
+                <for variable="x" start="0" end="w-1 " direction="inc" step="1">
+                    <assign variable="memory[buf + x + y*w]" expression="memory[map + x + y*w]"/>
+                </for>
+            </for>
+            <assign variable="memory[buf + memory[2] + memory[3]*w]" expression="memory[4]+1"/>
+            <declare name="TL, TM, TR, ML, MM, MR, BL, BM, BR, CL, CM, CR" type="String" array="False" size=""/>
+            <assign variable="TL" expression="&quot;&#9484;&#9472;&#9472;&#9472;&quot;"/>
+            <assign variable="TM" expression="&quot;&#9516;&#9472;&#9472;&#9472;&quot;"/>
+            <assign variable="TR" expression="&quot;&#9488;&quot;"/>
+            <assign variable="ML" expression="&quot;&#9500;&#9472;&#9472;&#9472;&quot;"/>
+            <assign variable="MM" expression="&quot;&#9532;&#9472;&#9472;&#9472;&quot;"/>
+            <assign variable="MR" expression="&quot;&#9508;&quot;"/>
+            <assign variable="BL" expression="&quot;&#9492;&#9472;&#9472;&#9472;&quot;"/>
+            <assign variable="BM" expression="&quot;&#9524;&#9472;&#9472;&#9472;&quot;"/>
+            <assign variable="BR" expression="&quot;&#9496;&quot;"/>
+            <assign variable="CL" expression="TL"/>
+            <assign variable="CM" expression="TM"/>
+            <assign variable="CR" expression="TR"/>
+            <declare name="out" type="String" array="False" size=""/>
+            <assign variable="out" expression="&quot;&quot;"/>
+            <for variable="y" start="0" end="h " direction="inc" step="1">
+                <assign variable="out" expression="out&amp;CL"/>
+                <for variable="x" start="0" end="w-2 " direction="inc" step="1">
+                    <assign variable="out" expression="out&amp;CM"/>
+                </for>
+                <assign variable="out" expression="out&amp;CR&amp;ToChar(13)"/>
+                <if expression="y&lt;h">
+                    <then>
+                        <for variable="x" start="0" end="w-1 " direction="inc" step="1">
+                            <assign variable="out" expression="out&amp;&quot;&#9474; &quot;&amp;ToChar(memory[6+memory[6+memory[5]+h*w + y*w + x]])&amp;&quot; &quot;"/>
+                        </for>
+                        <assign variable="out" expression="out&amp;&quot;&#9474;&quot;&amp;ToChar(13)"/>
+                    </then>
+                    <else/>
+                </if>
+                <if expression="y==0">
+                    <then>
+                        <assign variable="CL" expression="ML"/>
+                        <assign variable="CM" expression="MM"/>
+                        <assign variable="CR" expression="MR"/>
+                    </then>
+                    <else/>
+                </if>
+                <if expression="y==h-1">
+                    <then>
+                        <assign variable="CL" expression="BL"/>
+                        <assign variable="CM" expression="BM"/>
+                        <assign variable="CR" expression="BR"/>
+                    </then>
+                    <else/>
+                </if>
+            </for>
+            <output expression="out" newline="True"/>
+        </body>
+    </function>
+    <function name="Start" type="None" variable="">
+        <parameters>
+            <parameter name="mem" type="Integer" array="True"/>
+        </parameters>
+        <body>
+            <comment text="Evaluates the enter field rule and draws the game for first time "/>
+            <call expression="LevelRulesEnterField(mem) "/>
+            <call expression="Show(mem) "/>
+        </body>
+    </function>
+    <function name="StoreData" type="None" variable="">
+        <parameters>
+            <parameter name="mem" type="Integer" array="True"/>
+            <parameter name="slot" type="Integer" array="False"/>
+            <parameter name="data" type="Integer" array="False"/>
+        </parameters>
+        <body>
+            <comment text="Stores data to given slot "/>
+            <declare name="ptr, w, h" type="Integer" array="False" size=""/>
+            <assign variable="w" expression="mem[0]"/>
+            <assign variable="h" expression="mem[1]"/>
+            <assign variable="ptr" expression="6+mem[5]+2*h*w+slot"/>
+            <assign variable="mem[ptr]" expression="data"/>
+        </body>
+    </function>
+</flowgorithm>
