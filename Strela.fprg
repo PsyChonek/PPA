@@ -1,0 +1,92 @@
+<?xml version="1.0"?>
+<flowgorithm fileversion="3.0">
+    <attributes>
+        <attribute name="name" value=""/>
+        <attribute name="authors" value="Vazy"/>
+        <attribute name="about" value=""/>
+        <attribute name="saved" value="2023-10-11 02:55:58 odp."/>
+        <attribute name="created" value="VmF6eTtERVNLVE9QLUpQU1BPUzU7MjAyMy0xMC0xMTswMTo1NzozOSBvZHAuOzMwMzI="/>
+        <attribute name="edited" value="VmF6eTtERVNLVE9QLUpQU1BPUzU7MjAyMy0xMC0xMTswMjo1NTo1OCBvZHAuOzc7MzE0Ng=="/>
+    </attributes>
+    <function name="Main" type="None" variable="">
+        <parameters/>
+        <body>
+            <declare name="distance, miss, velocity, angle, size, distanceHit" type="Real" array="False" size=""/>
+            <assign variable="velocity" expression="InputReal(&quot;Zadej pocatecni rychlost:&quot;)"/>
+            <assign variable="angle" expression="InputReal(&quot;Zadej uhel:&quot;)"/>
+            <assign variable="distance" expression="InputReal(&quot;Zadej vzdalenost k cili:&quot;)"/>
+            <assign variable="size" expression="InputReal(&quot;Zadej velikost cile:&quot;)"/>
+            <assign variable="distanceHit" expression="ComputeImpactDistance(velocity, angle)"/>
+            <assign variable="miss" expression="IsTargetHit(distanceHit, distance, size)"/>
+            <call expression="OutputResult(distance, miss)"/>
+        </body>
+    </function>
+    <function name="ComputeImpactDistance" type="Real" variable="distance">
+        <parameters>
+            <parameter name="velocity" type="Real" array="False"/>
+            <parameter name="angle" type="Real" array="False"/>
+        </parameters>
+        <body>
+            <declare name="distance" type="Real" array="False" size=""/>
+            <assign variable="distance" expression="((velocity*velocity) * Sin(2*(angle*Pi/180))) / 9.81"/>
+        </body>
+    </function>
+    <function name="InputReal" type="Real" variable="result">
+        <parameters>
+            <parameter name="prompt" type="String" array="False"/>
+        </parameters>
+        <body>
+            <declare name="result" type="Real" array="False" size=""/>
+            <output expression="prompt" newline="True"/>
+            <input variable="result"/>
+        </body>
+    </function>
+    <function name="IsTargetHit" type="Real" variable="result">
+        <parameters>
+            <parameter name="distance" type="Real" array="False"/>
+            <parameter name="targetDistance" type="Real" array="False"/>
+            <parameter name="targetSize" type="Real" array="False"/>
+        </parameters>
+        <body>
+            <declare name="result" type="Real" array="False" size=""/>
+            <if expression="distance &gt; (targetDistance - targetSize/2) &amp;&amp; distance &lt; (targetDistance + targetSize/2)">
+                <then>
+                    <assign variable="result" expression="0"/>
+                </then>
+                <else>
+                    <if expression="targetDistance - distance &gt; 0">
+                        <then>
+                            <assign variable="result" expression="targetDistance - distance  - targetSize/2"/>
+                        </then>
+                        <else>
+                            <assign variable="result" expression="targetDistance - distance  + targetSize/2"/>
+                        </else>
+                    </if>
+                </else>
+            </if>
+        </body>
+    </function>
+    <function name="OutputResult" type="None" variable="">
+        <parameters>
+            <parameter name="targetDistance" type="Real" array="False"/>
+            <parameter name="miss" type="Real" array="False"/>
+        </parameters>
+        <body>
+            <if expression="miss &lt; -0.01 || miss &gt; 0.01">
+                <then>
+                    <if expression="miss &lt; 0">
+                        <then>
+                            <output expression="&quot;cil ve vzdalenosti &quot;&amp;ToFixed(targetDistance, 1)&amp;&quot; m byl prestrelen o &quot;&amp;ToFixed(Abs(miss), 1)&amp;&quot; m&quot;" newline="True"/>
+                        </then>
+                        <else>
+                            <output expression="&quot;do cile ve vzdalenosti &quot;&amp;ToFixed(targetDistance, 1)&amp;&quot; m chybi &quot;&amp;ToFixed(miss, 1)&amp;&quot; m&quot;" newline="True"/>
+                        </else>
+                    </if>
+                </then>
+                <else>
+                    <output expression="&quot;cil ve vzdalenosti &quot;&amp;ToFixed(targetDistance, 1)&amp;&quot; m zasazen!&quot;" newline="True"/>
+                </else>
+            </if>
+        </body>
+    </function>
+</flowgorithm>

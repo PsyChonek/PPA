@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<flowgorithm fileversion="3.0">
+    <attributes>
+        <attribute name="name" value=""/>
+        <attribute name="authors" value="Vazy"/>
+        <attribute name="about" value=""/>
+        <attribute name="saved" value="2023-10-10 11:47:14 dop."/>
+        <attribute name="created" value="VmF6eTtERVNLVE9QLUpQU1BPUzU7MjAyMy0xMC0xMDsxMTowNzowOCBkb3AuOzMwMjM="/>
+        <attribute name="edited" value="VmF6eTtERVNLVE9QLUpQU1BPUzU7MjAyMy0xMC0xMDsxMTo0NzoxNCBkb3AuOzI7MzEzMw=="/>
+    </attributes>
+    <function name="Main" type="None" variable="">
+        <parameters/>
+        <body>
+            <call expression="TestFloor(-5.5,-6) "/>
+            <call expression="TestFloor(-5,-5) "/>
+            <call expression="TestFloor(0,0) "/>
+            <call expression="TestFloor(1.5,1) "/>
+            <output expression="Pow(2,5)" newline="True"/>
+        </body>
+    </function>
+    <function name="Floor" type="Integer" variable="result">
+        <parameters>
+            <parameter name="i" type="Real" array="False"/>
+        </parameters>
+        <body>
+            <declare name="result" type="Integer" array="False" size=""/>
+            <if expression="i &lt; 0">
+                <then>
+                    <if expression="(-1*i) % (-1*Int(i)) == 0">
+                        <then/>
+                        <else>
+                            <assign variable="i" expression="i  - 1"/>
+                        </else>
+                    </if>
+                </then>
+                <else/>
+            </if>
+            <assign variable="result" expression="Int(i)"/>
+        </body>
+    </function>
+    <function name="Pow" type="Real" variable="result">
+        <parameters>
+            <parameter name="x" type="Real" array="False"/>
+            <parameter name="e" type="Real" array="False"/>
+        </parameters>
+        <body>
+            <declare name="result" type="Real" array="False" size=""/>
+            <declare name="i" type="Integer" array="False" size=""/>
+            <assign variable="i" expression="0"/>
+            <for variable="i" start="0" end="e" direction="inc" step="1">
+                <assign variable="result" expression="x * result"/>
+            </for>
+        </body>
+    </function>
+    <function name="TestFloor" type="None" variable="">
+        <parameters>
+            <parameter name="x" type="Real" array="False"/>
+            <parameter name="Expected" type="Real" array="False"/>
+        </parameters>
+        <body>
+            <declare name="Actual" type="Real" array="False" size=""/>
+            <assign variable="Actual" expression="Floor(x)"/>
+            <if expression="Actual == Expected">
+                <then>
+                    <output expression="&quot;Spr&#225;vn&#283; floor&quot; &amp; x &amp; Expected" newline="True"/>
+                </then>
+                <else>
+                    <output expression="&quot;Chyba floor&quot; &amp; x &amp; Expected" newline="True"/>
+                </else>
+            </if>
+        </body>
+    </function>
+</flowgorithm>

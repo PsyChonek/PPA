@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<flowgorithm fileversion="3.0">
+    <attributes>
+        <attribute name="name" value=""/>
+        <attribute name="authors" value="Vazy"/>
+        <attribute name="about" value=""/>
+        <attribute name="saved" value="2023-10-03 10:33:43 dop."/>
+        <attribute name="created" value="VmF6eTtERVNLVE9QLUpQU1BPUzU7MjAyMy0xMC0wMzsxMDoyOToxNiBkb3AuOzMwMjc="/>
+        <attribute name="edited" value="VmF6eTtERVNLVE9QLUpQU1BPUzU7MjAyMy0xMC0wMzsxMDozMzo0MyBkb3AuOzE7MzEzMA=="/>
+    </attributes>
+    <function name="Main" type="None" variable="">
+        <parameters/>
+        <body>
+            <declare name="number" type="Integer" array="False" size=""/>
+            <input variable="number"/>
+            <if expression="number &gt;= 0">
+                <then>
+                    <output expression="&quot;Cislo je kladne&quot;" newline="True"/>
+                </then>
+                <else>
+                    <output expression="&quot;Cislo je zaporne&quot;" newline="True"/>
+                </else>
+            </if>
+        </body>
+    </function>
+</flowgorithm>

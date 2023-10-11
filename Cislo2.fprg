@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<flowgorithm fileversion="3.0">
+    <attributes>
+        <attribute name="name" value=""/>
+        <attribute name="authors" value="Vazy"/>
+        <attribute name="about" value=""/>
+        <attribute name="saved" value="2023-10-03 11:04:02 dop."/>
+        <attribute name="created" value="VmF6eTtERVNLVE9QLUpQU1BPUzU7MjAyMy0xMC0wMzsxMDozODo0MiBkb3AuOzMwMjY="/>
+        <attribute name="edited" value="VmF6eTtERVNLVE9QLUpQU1BPUzU7MjAyMy0xMC0wMzsxMTowNDowMiBkb3AuOzE7MzEyNA=="/>
+    </attributes>
+    <function name="Main" type="None" variable="">
+        <parameters/>
+        <body>
+            <declare name="a, b, c" type="Real" array="False" size=""/>
+            <input variable="a"/>
+            <input variable="b"/>
+            <input variable="c"/>
+            <if expression="a &gt; b &amp;&amp; a &gt; c">
+                <then>
+                    <output expression="&quot;Cislo &quot;&amp;a&amp;&quot; je vetsi&quot;" newline="True"/>
+                </then>
+                <else/>
+            </if>
+            <if expression="b &gt; a &amp;&amp; b &gt; c">
+                <then>
+                    <output expression="&quot;Cislo &quot;&amp;b&amp;&quot; je vetsi&quot;" newline="True"/>
+                </then>
+                <else/>
+            </if>
+            <if expression="c &gt; b &amp;&amp; c &gt; a">
+                <then>
+                    <output expression="&quot;Cislo &quot;&amp;c&amp;&quot; je vetsi&quot;" newline="True"/>
+                </then>
+                <else/>
+            </if>
+        </body>
+    </function>
+</flowgorithm>
