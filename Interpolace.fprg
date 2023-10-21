@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+<flowgorithm fileversion="3.0">
+    <attributes>
+        <attribute name="name" value=""/>
+        <attribute name="authors" value="Vazy"/>
+        <attribute name="about" value=""/>
+        <attribute name="saved" value="2023-10-18 03:01:59 odp."/>
+        <attribute name="created" value="VmF6eTtERVNLVE9QLUpQU1BPUzU7MjAyMy0xMC0xODswMjowMzo1MCBvZHAuOzMwMjQ="/>
+        <attribute name="edited" value="VmF6eTtERVNLVE9QLUpQU1BPUzU7MjAyMy0xMC0xODswMzowMTo1OSBvZHAuOzE7MzE0MA=="/>
+    </attributes>
+    <function name="Main" type="None" variable="">
+        <parameters/>
+        <body>
+            <declare name="x0, y0, x1, y1, h00, h10, h01, h11, sx, sy" type="Real" array="False" size=""/>
+            <input variable="x0"/>
+            <input variable="y0"/>
+            <input variable="x1"/>
+            <input variable="y1"/>
+            <input variable="h00"/>
+            <input variable="h10"/>
+            <input variable="h01"/>
+            <input variable="h11"/>
+            <input variable="sx"/>
+            <input variable="sy"/>
+        </body>
+    </function>
+    <function name="BiLerp" type="Real" variable="result">
+        <parameters>
+            <parameter name="hx0y0" type="Real" array="False"/>
+            <parameter name="hx1y0" type="Real" array="False"/>
+            <parameter name="hx0y1" type="Real" array="False"/>
+            <parameter name="hx1y1" type="Real" array="False"/>
+            <parameter name="s" type="Real" array="False"/>
+            <parameter name="t" type="Real" array="False"/>
+        </parameters>
+        <body>
+            <declare name="result" type="Real" array="False" size=""/>
+            <assign variable="result" expression="Lerp(Lerp(hx0y0,hx1y0,s),Lerp(hx0y1,hx1y1,s),t)"/>
+        </body>
+    </function>
+    <function name="Lerp" type="Real" variable="result">
+        <parameters>
+            <parameter name="h0" type="Real" array="False"/>
+            <parameter name="h1" type="Real" array="False"/>
+            <parameter name="t" type="Real" array="False"/>
+        </parameters>
+        <body>
+            <declare name="result" type="Real" array="False" size=""/>
+            <assign variable="result" expression="(1-t)*h0+t*h1"/>
+        </body>
+    </function>
+    <function name="Normalize" type="Real" variable="result">
+        <parameters>
+            <parameter name="min" type="Real" array="False"/>
+            <parameter name="max" type="Real" array="False"/>
+            <parameter name="x" type="Real" array="False"/>
+        </parameters>
+        <body>
+            <declare name="result" type="Real" array="False" size=""/>
+            <assign variable="result" expression="(x-min) / (max-min)"/>
+        </body>
+    </function>
+    <function name="WriteHeader" type="None" variable="">
+        <parameters/>
+        <body>
+            <output expression="&quot;x, y, value&quot;" newline="True"/>
+        </body>
+    </function>
+    <function name="WriteInterpolation" type="None" variable="">
+        <parameters>
+            <parameter name="x0" type="Real" array="False"/>
+            <parameter name="y0" type="Real" array="False"/>
+            <parameter name="x1" type="Real" array="False"/>
+            <parameter name="y1" type="Real" array="False"/>
+            <parameter name="hx0y0" type="Real" array="False"/>
+            <parameter name="hx1y0" type="Real" array="False"/>
+            <parameter name="hx0y1" type="Real" array="False"/>
+            <parameter name="hx1y1" type="Real" array="False"/>
+            <parameter name="sx" type="Integer" array="False"/>
+            <parameter name="sy" type="Integer" array="False"/>
+        </parameters>
+        <body>
+            <for variable="x0" start="x0" end="x1" direction="inc" step="(x1-x0)/sx">
+                <for variable="" start="" end="" direction="inc" step=""/>
+            </for>
+        </body>
+    </function>
+</flowgorithm>
