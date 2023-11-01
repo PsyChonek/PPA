@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<flowgorithm fileversion="3.0">
+    <attributes>
+        <attribute name="name" value=""/>
+        <attribute name="authors" value="Vazy"/>
+        <attribute name="about" value=""/>
+        <attribute name="saved" value="2023-10-31 11:13:02 dop."/>
+        <attribute name="created" value="VmF6eTtERVNLVE9QLUpQU1BPUzU7MjAyMy0xMC0zMTsxMTowNjoyOSBkb3AuOzMwMjg="/>
+        <attribute name="edited" value="VmF6eTtERVNLVE9QLUpQU1BPUzU7MjAyMy0xMC0zMTsxMToxMzowMiBkb3AuOzM7MzEyNw=="/>
+    </attributes>
+    <function name="Main" type="None" variable="">
+        <parameters/>
+        <body/>
+    </function>
+    <function name="IsDecreasing" type="Boolean" variable="result">
+        <parameters>
+            <parameter name="array" type="Integer" array="True"/>
+        </parameters>
+        <body>
+            <declare name="result" type="Boolean" array="False" size=""/>
+            <declare name="i" type="Integer" array="False" size=""/>
+            <assign variable="result" expression="true"/>
+            <for variable="i" start="0" end="size(array)-2" direction="inc" step="1">
+                <if expression="array[i] &gt;= array[i+1]">
+                    <then/>
+                    <else>
+                        <assign variable="result" expression="false"/>
+                    </else>
+                </if>
+            </for>
+        </body>
+    </function>
+</flowgorithm>

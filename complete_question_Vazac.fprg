@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<flowgorithm fileversion="3.0">
+    <attributes>
+        <attribute name="name" value=""/>
+        <attribute name="authors" value="pet"/>
+        <attribute name="about" value=""/>
+        <attribute name="saved" value="2023-10-31 11:05:51 dop."/>
+        <attribute name="created" value="cGV0O1BFVE5COzIwMjMtMTAtMjc7MDI6NDY6NTYgUE07MTk5MA=="/>
+        <attribute name="edited" value="cGV0O1BFVE5COzIwMjMtMTAtMjc7MDI6NDk6NDIgb2RwLjszOzIzMTA="/>
+        <attribute name="edited" value="VmF6eTtERVNLVE9QLUpQU1BPUzU7MjAyMy0xMC0zMTsxMTowNTo1MSBkb3AuOzE7MzEzMA=="/>
+    </attributes>
+    <function name="Main" type="None" variable="">
+        <parameters/>
+        <body>
+            <declare name="n" type="Integer" array="False" size=""/>
+            <output expression="&quot;Zadej d&#233;lku sad&quot;" newline="True"/>
+            <input variable="n"/>
+            <declare name="setx" type="Integer" array="True" size="n"/>
+            <declare name="sety" type="Integer" array="True" size="n"/>
+            <declare name="result" type="Integer" array="True" size="n*2"/>
+            <call expression="ReadData(setx) "/>
+            <call expression="ReadData(sety) "/>
+            <call expression="MergeData(setx, sety, result) "/>
+            <call expression="PrintData(result) "/>
+        </body>
+    </function>
+    <function name="MergeData" type="None" variable="">
+        <parameters>
+            <parameter name="in1" type="Integer" array="True"/>
+            <parameter name="in2" type="Integer" array="True"/>
+            <parameter name="out" type="Integer" array="True"/>
+        </parameters>
+        <body>
+            <declare name="i" type="Integer" array="False" size=""/>
+            <for variable="i" start="0" end="size(in1)-1" direction="inc" step="1">
+                <assign variable="out[i]" expression="in1[i]"/>
+                <assign variable="out[i+size(in1)]" expression="in2[i]"/>
+            </for>
+        </body>
+    </function>
+    <function name="PrintData" type="None" variable="">
+        <parameters>
+            <parameter name="arr" type="Integer" array="True"/>
+        </parameters>
+        <body>
+            <declare name="i" type="Integer" array="False" size=""/>
+            <for variable="i" start="0" end="size(arr) - 1 " direction="inc" step="1">
+                <output expression="arr[i]&amp;&quot;, &quot;" newline="False"/>
+            </for>
+            <output expression="&quot;&quot;" newline="True"/>
+        </body>
+    </function>
+    <function name="ReadData" type="None" variable="">
+        <parameters>
+            <parameter name="arr" type="Integer" array="True"/>
+        </parameters>
+        <body>
+            <declare name="i" type="Integer" array="False" size=""/>
+            <for variable="i" start="0" end="size(arr) - 1 " direction="inc" step="1">
+                <input variable="arr[i]"/>
+            </for>
+        </body>
+    </function>
+</flowgorithm>
