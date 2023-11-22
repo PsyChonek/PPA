@@ -38,8 +38,8 @@ class Character:
         dmg = int(damage) - int(self.defense())
         if dmg < 0:
             dmg = 0
-        
         self.__vitality -= int(dmg)
+        print(self.__name + " utrpel poskozeni " + str(dmg) + " a ma " + str(self.__vitality) + " zivotu")
     
     def equip(self, hand:int, weapon: Weapon|None):
         if hand == self.HAND_LEFT:
