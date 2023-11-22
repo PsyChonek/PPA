@@ -1,6 +1,5 @@
 from is_prime import is_prime
 
-
 def print_sums_of_primes(num: int,n: int):
     for i in range(2, int(num/2)+1):
         if (is_prime(i) and is_prime(num-i)):
