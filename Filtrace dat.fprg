@@ -1,0 +1,94 @@
+<?xml version="1.0"?>
+<flowgorithm fileversion="3.0">
+    <attributes>
+        <attribute name="name" value=""/>
+        <attribute name="authors" value="Vazy"/>
+        <attribute name="about" value=""/>
+        <attribute name="saved" value="2023-10-22 01:56:06 odp."/>
+        <attribute name="created" value="VmF6eTtWQVpZLVBDOzIwMjMtMTAtMjI7MTI6NDU6NTcgb2RwLjsyNDQw"/>
+        <attribute name="edited" value="VmF6eTtWQVpZLVBDOzIwMjMtMTAtMjI7MDE6NTY6MDYgb2RwLjsyMjsyNTkz"/>
+    </attributes>
+    <function name="Main" type="None" variable="">
+        <parameters/>
+        <body/>
+    </function>
+    <function name="GenerateNoise" type="None" variable="">
+        <parameters>
+            <parameter name="output" type="Real" array="True"/>
+            <parameter name="scale" type="Real" array="False"/>
+        </parameters>
+        <body>
+            <declare name="i" type="Integer" array="False" size=""/>
+            <for variable="i" start="0" end="size(output)-1" direction="inc" step="1">
+                <assign variable="output[i]" expression="(Random(1001) / 1000) * 2 * scale - scale"/>
+            </for>
+        </body>
+    </function>
+    <function name="GenerateSin" type="None" variable="">
+        <parameters>
+            <parameter name="output" type="Real" array="True"/>
+            <parameter name="periods" type="Integer" array="False"/>
+        </parameters>
+        <body>
+            <declare name="i" type="Integer" array="False" size=""/>
+            <declare name="step" type="Real" array="False" size=""/>
+            <assign variable="step" expression="2*pi*periods/(size(output)-1)"/>
+            <for variable="i" start="0" end="size(output)-1" direction="inc" step="1">
+                <assign variable="output[i]" expression="sin(i*step)"/>
+            </for>
+        </body>
+    </function>
+    <function name="PrintMeasurement" type="None" variable="">
+        <parameters>
+            <parameter name="x" type="Real" array="True"/>
+            <parameter name="y" type="Real" array="True"/>
+            <parameter name="z" type="Real" array="True"/>
+        </parameters>
+        <body>
+            <declare name="i" type="Integer" array="False" size=""/>
+            <for variable="i" start="0" end="size(x) - 1" direction="inc" step="1">
+                <output expression="ToFixed(x[i],2)&amp;&quot;;&quot;&amp;ToFixed(y[i],2)&amp;&quot;;&quot;&amp;ToFixed(z[i],2)" newline="True"/>
+            </for>
+        </body>
+    </function>
+    <function name="SMA" type="None" variable="">
+        <parameters>
+            <parameter name="in" type="Real" array="True"/>
+            <parameter name="out" type="Real" array="True"/>
+            <parameter name="length" type="Integer" array="False"/>
+        </parameters>
+        <body>
+            <declare name="i, j, okLength" type="Integer" array="False" size=""/>
+            <declare name="sma" type="Real" array="False" size=""/>
+            <for variable="i" start="0" end="size(in)-1" direction="inc" step="1">
+                <if expression="i &lt; length">
+                    <then>
+                        <assign variable="okLength" expression="i"/>
+                    </then>
+                    <else>
+                        <assign variable="okLength" expression="length-1"/>
+                    </else>
+                </if>
+                <assign variable="sma" expression="0"/>
+                <for variable="j" start="okLength" end="0" direction="dec" step="1">
+                    <assign variable="sma" expression="sma + in[i-j]"/>
+                </for>
+                <assign variable="sma" expression="sma / (okLength+1)"/>
+                <assign variable="out[i]" expression="sma"/>
+            </for>
+        </body>
+    </function>
+    <function name="Superpose" type="None" variable="">
+        <parameters>
+            <parameter name="i1" type="Real" array="True"/>
+            <parameter name="i2" type="Real" array="True"/>
+            <parameter name="o" type="Real" array="True"/>
+        </parameters>
+        <body>
+            <declare name="i" type="Integer" array="False" size=""/>
+            <for variable="i" start="0" end="size(i1)-1" direction="inc" step="1">
+                <assign variable="o[i]" expression="i1[i] + i2[i]"/>
+            </for>
+        </body>
+    </function>
+</flowgorithm>

@@ -4,9 +4,10 @@
         <attribute name="name" value=""/>
         <attribute name="authors" value="Vazy"/>
         <attribute name="about" value=""/>
-        <attribute name="saved" value="2023-10-18 03:01:59 odp."/>
+        <attribute name="saved" value="2023-10-21 01:48:26 odp."/>
         <attribute name="created" value="VmF6eTtERVNLVE9QLUpQU1BPUzU7MjAyMy0xMC0xODswMjowMzo1MCBvZHAuOzMwMjQ="/>
         <attribute name="edited" value="VmF6eTtERVNLVE9QLUpQU1BPUzU7MjAyMy0xMC0xODswMzowMTo1OSBvZHAuOzE7MzE0MA=="/>
+        <attribute name="edited" value="VmF6eTtWQVpZLVBDOzIwMjMtMTAtMjE7MDE6NDg6MjYgb2RwLjszOzI1NDY="/>
     </attributes>
     <function name="Main" type="None" variable="">
         <parameters/>
@@ -22,6 +23,8 @@
             <input variable="h11"/>
             <input variable="sx"/>
             <input variable="sy"/>
+            <call expression="WriteHeader()"/>
+            <call expression="WriteInterpolation( x0, y0, x1, y1, h00, h10, h01, h11, sx, sy)"/>
         </body>
     </function>
     <function name="BiLerp" type="Real" variable="result">
@@ -80,8 +83,13 @@
             <parameter name="sy" type="Integer" array="False"/>
         </parameters>
         <body>
-            <for variable="x0" start="x0" end="x1" direction="inc" step="(x1-x0)/sx">
-                <for variable="" start="" end="" direction="inc" step=""/>
+            <declare name="xStep, yStep, x, y" type="Real" array="False" size=""/>
+            <assign variable="xStep" expression="(x1-x0)/(sx-1)"/>
+            <assign variable="yStep" expression="(y1-y0)/(sy-1)"/>
+            <for variable="y" start="y0" end="y1" direction="inc" step="yStep">
+                <for variable="x" start="x0" end="x1" direction="inc" step="xStep">
+                    <output expression="ToFixed(x,2)&amp;&quot;, &quot;&amp;ToFixed(y,2)&amp;&quot;, &quot;&amp;ToFixed(BiLerp(hx0y0,hx1y0,hx0y1,hx1y1,Normalize(x0, x1, x),Normalize(y0, y1, y)),2)" newline="True"/>
+                </for>
             </for>
         </body>
     </function>
