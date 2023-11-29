@@ -12,8 +12,8 @@ class World:
             for i in range(len(row)):
                 row[i] = symbols[row[i]]
         
-        _width = len(data[0])
-        _height = len(data)
+        self.__width = len(data[0])
+        self.__height = len(data)
         
     def is_empty(self, position:Vector2) -> bool:
         return self.__world[position.__y][position.__x] == " "
