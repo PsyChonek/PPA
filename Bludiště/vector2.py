@@ -22,8 +22,8 @@ class Vector2:
     
     @property 
     def x(self) -> int:
-        return self.x
+        return self.__x
     
     @property 
     def y(self) -> int:
-        return self.y
+        return self.__y

@@ -8,16 +8,31 @@ class Game:
     __hero: GameObject
     __home: GameObject
     
+    __gui: Gui
+    
     def __init__(self, world: World, hero: GameObject, home: GameObject) -> None:
         self.__world = world
         self.__hero = hero
         self.__home = home
         
+        self.__gui = Gui(world.width, world.height)
+        
     def run(self) -> bool:
-        self.__world.draw(Gui(10, 10))
-        self.__hero.move(self.__hero.position.)
-
-
+        # Vykresli svet
+        self.__world.draw(self.__gui)
+        self.__hero.draw(self.__gui)
+        self.__home.draw(self.__gui)
+        self.__gui.show()
+        self.__gui.clear()
+        inputVector = self.__gui.input_direction()
+        self.__hero.move(inputVector)
+        if self.__hero.position == self.__home.position:
+            return True
+        elif self.__world.is_empty(self.__hero.position):
+            return self.run()
+        return False
+    
+    
 if __name__ == "__main__":
     world = World(
 [[1,1,1,1,1,1],

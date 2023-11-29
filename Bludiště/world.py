@@ -8,12 +8,14 @@ class World:
     __world: list[list[str]]
     
     def __init__(self,data:list[list[int]],symbols:list[str]) -> None:
-        for row in data:
-            for i in range(len(row)):
-                row[i] = symbols[row[i]]
-        
         self.__width = len(data[0])
         self.__height = len(data)
+        self.__world = []
+        for y in range(self.__height):
+            row = []
+            for x in range(self.__width):
+                row.append(symbols[data[y][x]])
+            self.__world.append(row)
         
     def is_empty(self, position:Vector2) -> bool:
         return self.__world[position.__y][position.__x] == " "

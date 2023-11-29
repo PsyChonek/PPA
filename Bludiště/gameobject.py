@@ -13,7 +13,7 @@ class GameObject:
         self.__position += direction
     
     def draw(self, gui:Gui) -> None:
-        gui.draw(self.__position.__x, self.__position.__y, self.__symbol)
+        gui.draw(self.__position.x, self.__position.y, self.__symbol)
         
     @property
     def position(self) -> Vector2:
