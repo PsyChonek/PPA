@@ -18,7 +18,7 @@ class World:
             self.__world.append(row)
         
     def is_empty(self, position:Vector2) -> bool:
-        return self.__world[position.__y][position.__x] == " "
+        return self.__world[position.y][position.x] == " "
     
     def draw(self, gui:Gui) -> None:
         for y in range(self.__height):
